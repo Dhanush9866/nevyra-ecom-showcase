@@ -8,35 +8,53 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
+    /* Core brand colors - Flipkart-inspired blue theme */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 0 0% 0%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 0%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 0% 0%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Flipkart-style blue primary */
+    --primary: 213 94% 51%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 213 94% 46%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Light variants for backgrounds */
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 0 0% 0%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 40% 98%;
+    --muted-foreground: 0 0% 40%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 213 94% 96%;
+    --accent-foreground: 213 94% 51%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Subtle borders */
+    --border: 0 0% 90%;
+    --input: 0 0% 95%;
+    --ring: 213 94% 51%;
 
-    --radius: 0.5rem;
+    /* E-commerce specific colors */
+    --success: 120 61% 34%;
+    --success-foreground: 0 0% 100%;
+    --warning: 45 100% 51%;
+    --warning-foreground: 0 0% 0%;
+    --price: 0 72% 51%;
+    --discount: 120 61% 34%;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsla(0, 0%, 0%, 0.05);
+    --shadow-md: 0 4px 6px -1px hsla(0, 0%, 0%, 0.1);
+    --shadow-lg: 0 10px 15px -3px hsla(0, 0%, 0%, 0.1);
+
+    --radius: 0.375rem;
 
     --sidebar-background: 0 0% 98%;
 
