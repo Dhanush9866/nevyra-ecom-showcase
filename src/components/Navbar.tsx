@@ -10,6 +10,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 
 const categories = [
   {
@@ -118,8 +123,13 @@ const Navbar = () => {
             >
               <Menu className="h-5 w-5" />
             </Button>
-            <Link to="/">
-              <h1 className="text-2xl font-bold text-gray-800">Nevyra</h1>
+            <Link to="/" className="flex items-center space-x-2">
+              <img 
+                src="/logo.jpg" 
+                alt="Nevyra Logo" 
+                className="h-8 w-auto"
+              />
+              <span className="text-xl font-bold text-gray-800">NEVYRA</span>
             </Link>
           </div>
 
@@ -189,8 +199,8 @@ const Navbar = () => {
         <div className="container mx-auto px-4">
           <div className="hidden md:flex items-center space-x-8 py-2">
             {categories.map((category) => (
-              <DropdownMenu key={category.name}>
-                <DropdownMenuTrigger asChild>
+              <HoverCard key={category.name} openDelay={0} closeDelay={0}>
+                <HoverCardTrigger asChild>
                   <Button
                     variant="ghost"
                     className="text-foreground hover:bg-muted flex items-center space-x-1"
@@ -198,25 +208,27 @@ const Navbar = () => {
                     <span className="text-sm">{category.name}</span>
                     <ChevronDown className="h-3 w-3" />
                   </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-64 bg-popover border border-border">
-                  {category.subcategories.map((subcategory, index) => (
-                    <DropdownMenuItem
-                      key={index}
-                      className="text-popover-foreground hover:bg-accent"
-                    >
-                      <Link
-                        to={`/category/${category.name
-                          .toLowerCase()
-                          .replace(/\s+/g, "-")}`}
-                        className="w-full"
+                </HoverCardTrigger>
+                <HoverCardContent className="w-64 bg-popover border border-border p-0">
+                  <div className="py-2">
+                    {category.subcategories.map((subcategory, index) => (
+                      <div
+                        key={index}
+                        className="px-4 py-2 text-popover-foreground hover:bg-accent cursor-pointer"
                       >
-                        {subcategory}
-                      </Link>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
+                        <Link
+                          to={`/category/${category.name
+                            .toLowerCase()
+                            .replace(/\s+/g, "-")}`}
+                          className="w-full block"
+                        >
+                          {subcategory}
+                        </Link>
+                      </div>
+                    ))}
+                  </div>
+                </HoverCardContent>
+              </HoverCard>
             ))}
           </div>
 
@@ -224,34 +236,22 @@ const Navbar = () => {
           {isMobileMenuOpen && (
             <div className="md:hidden py-4 space-y-2">
               {categories.map((category) => (
-                <DropdownMenu key={category.name}>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      className="w-full justify-between text-foreground hover:bg-muted"
-                    >
-                      <span>{category.name}</span>
-                      <ChevronDown className="h-4 w-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-full bg-popover border border-border">
+                <div key={category.name} className="border-b border-border pb-2">
+                  <div className="font-medium text-foreground mb-2">{category.name}</div>
+                  <div className="space-y-1 pl-4">
                     {category.subcategories.map((subcategory, index) => (
-                      <DropdownMenuItem
+                      <Link
                         key={index}
-                        className="text-popover-foreground hover:bg-accent"
+                        to={`/category/${category.name
+                          .toLowerCase()
+                          .replace(/\s+/g, "-")}`}
+                        className="block text-sm text-muted-foreground hover:text-foreground py-1"
                       >
-                        <Link
-                          to={`/category/${category.name
-                            .toLowerCase()
-                            .replace(/\s+/g, "-")}`}
-                          className="w-full"
-                        >
-                          {subcategory}
-                        </Link>
-                      </DropdownMenuItem>
+                        {subcategory}
+                      </Link>
                     ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                  </div>
+                </div>
               ))}
             </div>
           )}
