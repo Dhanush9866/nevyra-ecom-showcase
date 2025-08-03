@@ -226,47 +226,18 @@ const ProductDetail = () => {
               </div>
             </div>
 
-            {/* Seller Info */}
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h4 className="font-medium text-foreground">Sold by</h4>
-                    <p className="text-primary font-medium">{product.seller}</p>
-                    <p className="text-sm text-muted-foreground">{product.warranty}</p>
-                  </div>
-                  <Badge variant="outline" className="text-success border-success">
-                    Verified Seller
-                  </Badge>
-                </div>
-              </CardContent>
-            </Card>
+
           </div>
         </div>
 
         {/* Product Details Tabs */}
-        <Tabs defaultValue="specifications" className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="specifications">Specifications</TabsTrigger>
+        <Tabs defaultValue="description" className="w-full">
+          <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="description">Description</TabsTrigger>
             <TabsTrigger value="reviews">Reviews ({product.totalReviews})</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="specifications" className="space-y-4">
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="font-semibold text-foreground mb-4">Product Specifications</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {Object.entries(product.specifications).map(([key, value]) => (
-                    <div key={key} className="flex justify-between py-2 border-b border-border last:border-b-0">
-                      <span className="font-medium text-foreground">{key}</span>
-                      <span className="text-muted-foreground">{value}</span>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
+
           
           <TabsContent value="description" className="space-y-4">
             <Card>
