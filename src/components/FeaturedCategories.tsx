@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Smartphone, ShirtIcon, Home, Zap } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const categories = [
   {
@@ -37,7 +38,8 @@ const FeaturedCategories = () => {
             Shop by Category
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Explore our wide range of categories and find exactly what you're looking for
+            Explore our wide range of categories and find exactly what you're
+            looking for
           </p>
         </div>
 
@@ -45,20 +47,28 @@ const FeaturedCategories = () => {
           {categories.map((category, index) => {
             const IconComponent = category.icon;
             return (
-              <Card 
-                key={index} 
-                className="p-6 hover:shadow-lg transition-shadow duration-300 cursor-pointer group border border-border bg-card"
+              <Link
+                key={index}
+                to={`/category/${category.title
+                  .toLowerCase()
+                  .replace(/\s+/g, "-")
+                  .replace(/[&]/g, "and")}`}
+                className="block"
               >
-                <div className={`${category.color} w-16 h-16 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <IconComponent className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold text-card-foreground mb-2 font-roboto">
-                  {category.title}
-                </h3>
-                <p className="text-muted-foreground">
-                  {category.description}
-                </p>
-              </Card>
+                <Card className="p-6 hover:shadow-lg transition-shadow duration-300 cursor-pointer group border border-border bg-card">
+                  <div
+                    className={`${category.color} w-16 h-16 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}
+                  >
+                    <IconComponent className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-card-foreground mb-2 font-roboto">
+                    {category.title}
+                  </h3>
+                  <p className="text-muted-foreground">
+                    {category.description}
+                  </p>
+                </Card>
+              </Link>
             );
           })}
         </div>

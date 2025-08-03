@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -7,7 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Star, ShoppingCart, SlidersHorizontal } from "lucide-react";
 import phoneProduct from "@/assets/phone-product.jpg";
 import shoesProduct from "@/assets/shoes-product.jpg";
@@ -86,13 +92,15 @@ const ProductListing = () => {
     if (checked) {
       setSelectedBrands([...selectedBrands, brand]);
     } else {
-      setSelectedBrands(selectedBrands.filter(b => b !== brand));
+      setSelectedBrands(selectedBrands.filter((b) => b !== brand));
     }
   };
 
-  const filteredProducts = products.filter(product => {
-    const inPriceRange = product.salePrice >= priceRange[0] && product.salePrice <= priceRange[1];
-    const inSelectedBrands = selectedBrands.length === 0 || selectedBrands.includes(product.brand);
+  const filteredProducts = products.filter((product) => {
+    const inPriceRange =
+      product.salePrice >= priceRange[0] && product.salePrice <= priceRange[1];
+    const inSelectedBrands =
+      selectedBrands.length === 0 || selectedBrands.includes(product.brand);
     return inPriceRange && inSelectedBrands;
   });
 
@@ -114,7 +122,7 @@ const ProductListing = () => {
   return (
     <div className="min-h-screen bg-background font-roboto">
       <Navbar />
-      
+
       <div className="container mx-auto px-4 py-6">
         {/* Breadcrumb and Header */}
         <div className="mb-6">
@@ -141,8 +149,12 @@ const ProductListing = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="popularity">Popularity</SelectItem>
-                  <SelectItem value="price-low-high">Price: Low to High</SelectItem>
-                  <SelectItem value="price-high-low">Price: High to Low</SelectItem>
+                  <SelectItem value="price-low-high">
+                    Price: Low to High
+                  </SelectItem>
+                  <SelectItem value="price-high-low">
+                    Price: High to Low
+                  </SelectItem>
                   <SelectItem value="rating">Customer Rating</SelectItem>
                   <SelectItem value="newest">Newest First</SelectItem>
                 </SelectContent>
@@ -153,14 +165,16 @@ const ProductListing = () => {
 
         <div className="flex gap-6">
           {/* Sidebar Filters */}
-          <div className={`w-64 ${showFilters ? 'block' : 'hidden'} md:block`}>
+          <div className={`w-64 ${showFilters ? "block" : "hidden"} md:block`}>
             <Card className="sticky top-4">
               <CardContent className="p-6">
                 <h3 className="font-semibold text-foreground mb-4">Filters</h3>
-                
+
                 {/* Price Range */}
                 <div className="mb-6">
-                  <h4 className="font-medium text-foreground mb-3">Price Range</h4>
+                  <h4 className="font-medium text-foreground mb-3">
+                    Price Range
+                  </h4>
                   <Slider
                     value={priceRange}
                     onValueChange={setPriceRange}
@@ -184,7 +198,9 @@ const ProductListing = () => {
                         <Checkbox
                           id={brand}
                           checked={selectedBrands.includes(brand)}
-                          onCheckedChange={(checked) => handleBrandChange(brand, checked as boolean)}
+                          onCheckedChange={(checked) =>
+                            handleBrandChange(brand, checked as boolean)
+                          }
                         />
                         <label
                           htmlFor={brand}
@@ -199,7 +215,9 @@ const ProductListing = () => {
 
                 {/* Rating Filter */}
                 <div className="mb-6">
-                  <h4 className="font-medium text-foreground mb-3">Customer Rating</h4>
+                  <h4 className="font-medium text-foreground mb-3">
+                    Customer Rating
+                  </h4>
                   <div className="space-y-2">
                     {[4, 3, 2, 1].map((rating) => (
                       <div key={rating} className="flex items-center space-x-2">
@@ -219,17 +237,25 @@ const ProductListing = () => {
 
                 {/* Availability */}
                 <div>
-                  <h4 className="font-medium text-foreground mb-3">Availability</h4>
+                  <h4 className="font-medium text-foreground mb-3">
+                    Availability
+                  </h4>
                   <div className="space-y-2">
                     <div className="flex items-center space-x-2">
                       <Checkbox id="in-stock" />
-                      <label htmlFor="in-stock" className="text-sm text-foreground cursor-pointer">
+                      <label
+                        htmlFor="in-stock"
+                        className="text-sm text-foreground cursor-pointer"
+                      >
                         In Stock
                       </label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Checkbox id="fast-delivery" />
-                      <label htmlFor="fast-delivery" className="text-sm text-foreground cursor-pointer">
+                      <label
+                        htmlFor="fast-delivery"
+                        className="text-sm text-foreground cursor-pointer"
+                      >
                         Fast Delivery
                       </label>
                     </div>
@@ -243,36 +269,49 @@ const ProductListing = () => {
           <div className="flex-1">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {sortedProducts.map((product) => (
-                <Card key={product.id} className="group hover:shadow-lg transition-shadow duration-300 bg-card border border-border">
+                <Card
+                  key={product.id}
+                  className="group hover:shadow-lg transition-shadow duration-300 bg-card border border-border"
+                >
                   <CardContent className="p-4">
-                    <div className="relative mb-4">
-                      <img 
-                        src={product.image} 
-                        alt={product.name}
-                        className="w-full h-48 object-cover rounded-lg"
-                      />
-                      <Badge className="absolute top-2 left-2 bg-discount text-white">
-                        {product.discount}% OFF
-                      </Badge>
-                    </div>
-                    
-                    <h3 className="font-semibold text-card-foreground mb-2 font-roboto group-hover:text-primary transition-colors line-clamp-2">
-                      {product.name}
-                    </h3>
-                    
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className="flex items-center">
-                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                        <span className="text-sm font-medium ml-1">{product.rating}</span>
+                    <Link to={`/product/${product.id}`}>
+                      <div className="relative mb-4">
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="w-full h-48 object-cover rounded-lg"
+                        />
+                        <Badge className="absolute top-2 left-2 bg-discount text-white">
+                          {product.discount}% OFF
+                        </Badge>
                       </div>
-                      <span className="text-sm text-muted-foreground">({product.reviews})</span>
-                    </div>
-                    
-                    <div className="flex items-center gap-2 mb-4">
-                      <span className="text-xl font-bold text-price">₹{product.salePrice.toLocaleString()}</span>
-                      <span className="text-sm text-muted-foreground line-through">₹{product.originalPrice.toLocaleString()}</span>
-                    </div>
-                    
+
+                      <h3 className="font-semibold text-card-foreground mb-2 font-roboto group-hover:text-primary transition-colors line-clamp-2">
+                        {product.name}
+                      </h3>
+
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="flex items-center">
+                          <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                          <span className="text-sm font-medium ml-1">
+                            {product.rating}
+                          </span>
+                        </div>
+                        <span className="text-sm text-muted-foreground">
+                          ({product.reviews})
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-2 mb-4">
+                        <span className="text-xl font-bold text-price">
+                          ₹{product.salePrice.toLocaleString()}
+                        </span>
+                        <span className="text-sm text-muted-foreground line-through">
+                          ₹{product.originalPrice.toLocaleString()}
+                        </span>
+                      </div>
+                    </Link>
+
                     <Button className="w-full bg-primary hover:bg-primary-hover text-primary-foreground">
                       <ShoppingCart className="h-4 w-4 mr-2" />
                       Add to Cart
@@ -284,7 +323,11 @@ const ProductListing = () => {
 
             {/* Load More */}
             <div className="text-center mt-8">
-              <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+              >
                 Load More Products
               </Button>
             </div>
