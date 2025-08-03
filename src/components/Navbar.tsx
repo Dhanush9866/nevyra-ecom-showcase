@@ -9,47 +9,102 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const categories = [
   {
     name: "Medical & Pharmacy",
-    subcategories: ["Personal Care", "Skin Care", "Hair Care", "Makeup", "Foot, Hand & Nail Care", "Salon Equipment", "Shave & Hair Removal", "Fragrance"]
+    subcategories: [
+      "Personal Care",
+      "Skin Care",
+      "Hair Care",
+      "Makeup",
+      "Foot, Hand & Nail Care",
+      "Salon Equipment",
+      "Shave & Hair Removal",
+      "Fragrance",
+    ],
   },
   {
     name: "Groceries",
-    subcategories: ["General food items", "Daily essentials"]
+    subcategories: ["General food items", "Daily essentials"],
   },
   {
     name: "Fashion & Beauty",
-    subcategories: ["Menswear", "Women's Wear", "Kids Wear", "Men's Shoes", "Women's Shoes", "Kids Shoes", "Watches", "Luggage"]
+    subcategories: [
+      "Menswear",
+      "Women's Wear",
+      "Kids Wear",
+      "Men's Shoes",
+      "Women's Shoes",
+      "Kids Shoes",
+      "Watches",
+      "Luggage",
+    ],
   },
   {
     name: "Devices",
-    subcategories: ["Cell Phones & Accessories", "Laptops", "Televisions", "Refrigerators", "Smart Watches"]
+    subcategories: [
+      "Cell Phones & Accessories",
+      "Laptops",
+      "Televisions",
+      "Refrigerators",
+      "Smart Watches",
+    ],
   },
   {
     name: "Electrical",
-    subcategories: ["Solar Panels", "Solar Fencing Kit", "Batteries", "Transformers", "Wiring Cables", "LED Bulbs", "Tube Lights", "Ceiling Fan"]
+    subcategories: [
+      "Solar Panels",
+      "Solar Fencing Kit",
+      "Batteries",
+      "Transformers",
+      "Wiring Cables",
+      "LED Bulbs",
+      "Tube Lights",
+      "Ceiling Fan",
+    ],
   },
   {
     name: "Automotive",
-    subcategories: ["Bike Accessories", "Car Accessories", "Engine Oil", "Brake Fluid", "Air Filter"]
+    subcategories: [
+      "Bike Accessories",
+      "Car Accessories",
+      "Engine Oil",
+      "Brake Fluid",
+      "Air Filter",
+    ],
   },
   {
     name: "Sports",
-    subcategories: ["Cricket Bats", "Cricket Balls", "Stumps", "Cricket Kit", "Volleyball", "Volleyball Net"]
+    subcategories: [
+      "Cricket Bats",
+      "Cricket Balls",
+      "Stumps",
+      "Cricket Kit",
+      "Volleyball",
+      "Volleyball Net",
+    ],
   },
   {
     name: "Home Interior",
-    subcategories: ["Gypsum False Ceiling", "Cove Lights", "Main Door", "Wall Paint", "Wallpaper", "Curtains", "Wall Tiles"]
-  }
+    subcategories: [
+      "Gypsum False Ceiling",
+      "Cove Lights",
+      "Main Door",
+      "Wall Paint",
+      "Wallpaper",
+      "Curtains",
+      "Wall Tiles",
+    ],
+  },
 ];
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <div className="bg-primary font-roboto">
+    <div className="bg-cyan-100 font-roboto">
       {/* Main Navbar */}
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
@@ -58,12 +113,14 @@ const Navbar = () => {
             <Button
               variant="ghost"
               size="sm"
-              className="md:hidden text-primary-foreground hover:bg-primary-hover"
+              className="md:hidden text-gray-800 hover:bg-cyan-200"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               <Menu className="h-5 w-5" />
             </Button>
-            <h1 className="text-2xl font-bold text-primary-foreground">Nevyra</h1>
+            <Link to="/">
+              <h1 className="text-2xl font-bold text-gray-800">Nevyra</h1>
+            </Link>
           </div>
 
           {/* Search Bar */}
@@ -85,15 +142,27 @@ const Navbar = () => {
 
           {/* Right Side Actions */}
           <div className="flex items-center space-x-4">
-            <Button variant="ghost" className="text-primary-foreground hover:bg-primary-hover hidden md:flex items-center space-x-1">
-              <User className="h-4 w-4" />
-              <span className="text-sm">Login</span>
-            </Button>
-            <Button variant="ghost" className="text-primary-foreground hover:bg-primary-hover flex items-center space-x-1 relative">
-              <ShoppingCart className="h-4 w-4" />
-              <span className="text-sm hidden md:inline">Cart</span>
-              <span className="absolute -top-1 -right-1 bg-warning text-warning-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
-            </Button>
+            <Link to="/auth">
+              <Button
+                variant="ghost"
+                className="text-gray-800 hover:bg-cyan-200 hidden md:flex items-center space-x-1"
+              >
+                <User className="h-4 w-4" />
+                <span className="text-sm">Login</span>
+              </Button>
+            </Link>
+            <Link to="/cart">
+              <Button
+                variant="ghost"
+                className="text-gray-800 hover:bg-cyan-200 flex items-center space-x-1 relative"
+              >
+                <ShoppingCart className="h-4 w-4" />
+                <span className="text-sm hidden md:inline">Cart</span>
+                <span className="absolute -top-1 -right-1 bg-warning text-warning-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  0
+                </span>
+              </Button>
+            </Link>
           </div>
         </div>
 
@@ -122,15 +191,28 @@ const Navbar = () => {
             {categories.map((category) => (
               <DropdownMenu key={category.name}>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="text-foreground hover:bg-muted flex items-center space-x-1">
+                  <Button
+                    variant="ghost"
+                    className="text-foreground hover:bg-muted flex items-center space-x-1"
+                  >
                     <span className="text-sm">{category.name}</span>
                     <ChevronDown className="h-3 w-3" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-64 bg-popover border border-border">
                   {category.subcategories.map((subcategory, index) => (
-                    <DropdownMenuItem key={index} className="text-popover-foreground hover:bg-accent">
-                      {subcategory}
+                    <DropdownMenuItem
+                      key={index}
+                      className="text-popover-foreground hover:bg-accent"
+                    >
+                      <Link
+                        to={`/category/${category.name
+                          .toLowerCase()
+                          .replace(/\s+/g, "-")}`}
+                        className="w-full"
+                      >
+                        {subcategory}
+                      </Link>
                     </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>
@@ -144,15 +226,28 @@ const Navbar = () => {
               {categories.map((category) => (
                 <DropdownMenu key={category.name}>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="w-full justify-between text-foreground hover:bg-muted">
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-between text-foreground hover:bg-muted"
+                    >
                       <span>{category.name}</span>
                       <ChevronDown className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="w-full bg-popover border border-border">
                     {category.subcategories.map((subcategory, index) => (
-                      <DropdownMenuItem key={index} className="text-popover-foreground hover:bg-accent">
-                        {subcategory}
+                      <DropdownMenuItem
+                        key={index}
+                        className="text-popover-foreground hover:bg-accent"
+                      >
+                        <Link
+                          to={`/category/${category.name
+                            .toLowerCase()
+                            .replace(/\s+/g, "-")}`}
+                          className="w-full"
+                        >
+                          {subcategory}
+                        </Link>
                       </DropdownMenuItem>
                     ))}
                   </DropdownMenuContent>
