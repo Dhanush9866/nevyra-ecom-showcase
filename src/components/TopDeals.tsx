@@ -92,53 +92,53 @@ const TopDeals = () => {
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide scroll-smooth" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           {products.slice(0, 8).map((product) => (
             <Card
               key={product.id}
-              className="group hover:shadow-lg transition-shadow duration-300 bg-card border border-border"
+              className="min-w-[200px] flex-shrink-0 group hover:shadow-xl hover:scale-105 transition-all duration-300 bg-card border border-border transform hover:-translate-y-1 cursor-pointer"
             >
-              <CardContent className="p-4">
+              <CardContent className="p-3">
                 <Link to={`/product/${product.id}`}>
-                  <div className="relative mb-4">
+                  <div className="relative mb-2">
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-48 object-cover rounded-lg"
+                      className="w-full h-32 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
                     />
-                    <Badge className="absolute top-2 left-2 bg-discount text-white">
+                    <Badge className="absolute top-1 left-1 bg-discount text-white text-xs px-1.5 py-0.5 group-hover:scale-110 transition-transform duration-300">
                       {product.discount}% OFF
                     </Badge>
                   </div>
 
-                  <h3 className="font-semibold text-card-foreground mb-2 font-roboto group-hover:text-primary transition-colors">
+                  <h3 className="font-semibold text-card-foreground mb-1.5 font-roboto group-hover:text-primary transition-colors line-clamp-2 text-sm">
                     {product.name}
                   </h3>
 
-                  <div className="flex items-center gap-2 mb-2">
+                  <div className="flex items-center gap-1 mb-1.5">
                     <div className="flex items-center">
-                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                      <span className="text-sm font-medium ml-1">
+                      <Star className="h-3 w-3 fill-yellow-400 text-yellow-400 group-hover:scale-110 transition-transform duration-200" />
+                      <span className="text-xs font-medium ml-1">
                         {product.rating}
                       </span>
                     </div>
-                    <span className="text-sm text-muted-foreground">
+                    <span className="text-xs text-muted-foreground">
                       ({product.reviews})
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="text-xl font-bold text-price">
+                  <div className="flex items-center gap-1 mb-2">
+                    <span className="text-sm font-bold text-price group-hover:text-primary transition-colors duration-200">
                       ₹{product.salePrice.toLocaleString()}
                     </span>
-                    <span className="text-sm text-muted-foreground line-through">
+                    <span className="text-xs text-muted-foreground line-through">
                       ₹{product.originalPrice.toLocaleString()}
                     </span>
                   </div>
                 </Link>
 
-                <Button className="w-full bg-primary hover:bg-primary-hover text-primary-foreground">
-                  <ShoppingCart className="h-4 w-4 mr-2" />
+                <Button className="w-full bg-primary hover:bg-primary-hover text-primary-foreground text-xs py-1.5 group-hover:scale-105 transition-all duration-200 hover:shadow-md">
+                  <ShoppingCart className="h-3 w-3 mr-1 group-hover:scale-110 transition-transform duration-200" />
                   Add to Cart
                 </Button>
               </CardContent>
