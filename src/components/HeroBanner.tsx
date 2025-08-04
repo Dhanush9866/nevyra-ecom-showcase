@@ -74,7 +74,7 @@ const HeroBanner = () => {
   };
 
   return (
-    <div className="relative bg-gradient-to-r from-primary to-primary-hover overflow-hidden min-h-[400px] md:h-[500px] lg:h-[600px]">
+    <div className="relative bg-gradient-to-r from-primary to-primary-hover overflow-hidden min-h-[300px] md:h-[350px] lg:h-[400px]">
       {/* Slides */}
       {slides.map((slide, index) => (
         <div
@@ -83,7 +83,7 @@ const HeroBanner = () => {
             index === currentSlide ? "opacity-100" : "opacity-0"
           }`}
         >
-          <div className="container mx-auto px-4 py-8 md:py-12 lg:py-16 relative z-10 h-full">
+          <div className="w-full px-4 py-6 md:py-8 lg:py-10 relative z-10 h-full">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 lg:gap-8 items-center h-full">
               <div className="text-primary-foreground text-center lg:text-left">
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-3 md:mb-4 font-roboto leading-tight">
@@ -119,7 +119,7 @@ const HeroBanner = () => {
                 <img
                   src={slide.image}
                   alt={slide.title}
-                  className="w-full h-auto max-h-[300px] md:max-h-[400px] lg:max-h-none object-contain rounded-lg shadow-lg mx-auto lg:mx-0"
+                  className="w-full h-auto max-h-[200px] md:max-h-[250px] lg:max-h-[300px] object-contain rounded-lg shadow-lg mx-auto lg:mx-0"
                 />
               </div>
             </div>

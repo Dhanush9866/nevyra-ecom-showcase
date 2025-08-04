@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -110,6 +111,7 @@ const addresses = [
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState("orders");
+  const navigate = useNavigate();
 
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
@@ -154,7 +156,7 @@ const Profile = () => {
                   <Button
                     variant={activeTab === "wishlist" ? "default" : "ghost"}
                     className="w-full justify-start"
-                    onClick={() => setActiveTab("wishlist")}
+                    onClick={() => navigate("/wishlist")}
                   >
                     <Heart className="h-4 w-4 mr-2" />
                     Wishlist
@@ -268,7 +270,7 @@ const Profile = () => {
                   <span className="text-muted-foreground">{wishlistItems.length} items</span>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {wishlistItems.map((item) => (
                     <Card key={item.id} className="group hover:shadow-lg transition-shadow">
                       <CardContent className="p-4">
