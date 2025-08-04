@@ -1,4 +1,4 @@
-import { Search, User, ShoppingCart, Menu, ChevronDown } from "lucide-react";
+import { Search, User, ShoppingCart, Menu, ChevronDown, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -107,6 +107,11 @@ const categories = [
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
+
+  const toggleCategory = (categoryName: string) => {
+    setExpandedCategory(expandedCategory === categoryName ? null : categoryName);
+  };
 
   return (
     <div className="bg-cyan-100 font-roboto">
@@ -121,7 +126,7 @@ const Navbar = () => {
               className="md:hidden text-gray-800 hover:bg-cyan-200"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              <Menu className="h-5 w-5" />
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
             <Link to="/" className="flex items-center space-x-2">
               <img 
@@ -197,6 +202,7 @@ const Navbar = () => {
       {/* Category Navigation */}
       <div className="bg-background border-t border-border">
         <div className="container mx-auto px-4">
+          {/* Desktop Categories */}
           <div className="hidden md:flex items-center space-x-8 py-2">
             {categories.map((category) => (
               <HoverCard key={category.name} openDelay={0} closeDelay={0}>
@@ -232,25 +238,69 @@ const Navbar = () => {
             ))}
           </div>
 
+          {/* Mobile Categories Quick Access */}
+          <div className="md:hidden py-2 overflow-x-auto">
+            <div className="flex space-x-2 min-w-max">
+              {categories.map((category) => (
+                <Link
+                  key={category.name}
+                  to={`/category/${category.name
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")}`}
+                  className="whitespace-nowrap px-3 py-1 text-xs bg-muted hover:bg-muted/80 text-muted-foreground rounded-full transition-colors"
+                >
+                  {category.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
           {/* Mobile Category Menu */}
           {isMobileMenuOpen && (
-            <div className="md:hidden py-4 space-y-2">
+            <div className="md:hidden py-4 space-y-2 max-h-[70vh] overflow-y-auto">
+              {/* Mobile Login Link */}
+              <div className="pb-4 border-b border-border">
+                <Link to="/auth">
+                  <Button
+                    variant="ghost"
+                    className="text-gray-800 hover:bg-cyan-200 w-full justify-start"
+                  >
+                    <User className="h-4 w-4 mr-2" />
+                    <span className="text-sm">Login</span>
+                  </Button>
+                </Link>
+              </div>
+              
+              {/* Categories */}
               {categories.map((category) => (
                 <div key={category.name} className="border-b border-border pb-2">
-                  <div className="font-medium text-foreground mb-2">{category.name}</div>
-                  <div className="space-y-1 pl-4">
-                    {category.subcategories.map((subcategory, index) => (
-                      <Link
-                        key={index}
-                        to={`/category/${category.name
-                          .toLowerCase()
-                          .replace(/\s+/g, "-")}`}
-                        className="block text-sm text-muted-foreground hover:text-foreground py-1"
-                      >
-                        {subcategory}
-                      </Link>
-                    ))}
-                  </div>
+                  <button
+                    onClick={() => toggleCategory(category.name)}
+                    className="w-full flex items-center justify-between font-medium text-foreground mb-2 py-2 hover:bg-muted rounded px-2"
+                  >
+                    <span>{category.name}</span>
+                    <ChevronDown 
+                      className={`h-4 w-4 transition-transform ${
+                        expandedCategory === category.name ? 'rotate-180' : ''
+                      }`} 
+                    />
+                  </button>
+                  {expandedCategory === category.name && (
+                    <div className="space-y-1 pl-4 bg-muted/30 rounded p-2">
+                      {category.subcategories.map((subcategory, index) => (
+                        <Link
+                          key={index}
+                          to={`/category/${category.name
+                            .toLowerCase()
+                            .replace(/\s+/g, "-")}`}
+                          className="block text-sm text-muted-foreground hover:text-foreground py-2 px-2 rounded hover:bg-muted"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          {subcategory}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

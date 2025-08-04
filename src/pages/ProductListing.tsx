@@ -267,53 +267,53 @@ const ProductListing = () => {
 
           {/* Product Grid */}
           <div className="flex-1">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
               {sortedProducts.map((product) => (
                 <Card
                   key={product.id}
                   className="group hover:shadow-lg transition-shadow duration-300 bg-card border border-border"
                 >
-                  <CardContent className="p-4">
+                  <CardContent className="p-3 md:p-4">
                     <Link to={`/product/${product.id}`}>
-                      <div className="relative mb-4">
+                      <div className="relative mb-3 md:mb-4">
                         <img
                           src={product.image}
                           alt={product.name}
-                          className="w-full h-48 object-cover rounded-lg"
+                          className="w-full h-32 md:h-48 object-cover rounded-lg"
                         />
-                        <Badge className="absolute top-2 left-2 bg-discount text-white">
+                        <Badge className="absolute top-1 md:top-2 left-1 md:left-2 bg-discount text-white text-xs md:text-sm">
                           {product.discount}% OFF
                         </Badge>
                       </div>
 
-                      <h3 className="font-semibold text-card-foreground mb-2 font-roboto group-hover:text-primary transition-colors line-clamp-2">
+                      <h3 className="font-semibold text-card-foreground mb-2 font-roboto group-hover:text-primary transition-colors line-clamp-2 text-sm md:text-base">
                         {product.name}
                       </h3>
 
-                      <div className="flex items-center gap-2 mb-2">
+                      <div className="flex items-center gap-1 md:gap-2 mb-2">
                         <div className="flex items-center">
-                          <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                          <span className="text-sm font-medium ml-1">
+                          <Star className="h-3 w-3 md:h-4 md:w-4 fill-yellow-400 text-yellow-400" />
+                          <span className="text-xs md:text-sm font-medium ml-1">
                             {product.rating}
                           </span>
                         </div>
-                        <span className="text-sm text-muted-foreground">
+                        <span className="text-xs md:text-sm text-muted-foreground">
                           ({product.reviews})
                         </span>
                       </div>
 
-                      <div className="flex items-center gap-2 mb-4">
-                        <span className="text-xl font-bold text-price">
+                      <div className="flex items-center gap-1 md:gap-2 mb-3 md:mb-4">
+                        <span className="text-lg md:text-xl font-bold text-price">
                           ₹{product.salePrice.toLocaleString()}
                         </span>
-                        <span className="text-sm text-muted-foreground line-through">
+                        <span className="text-xs md:text-sm text-muted-foreground line-through">
                           ₹{product.originalPrice.toLocaleString()}
                         </span>
                       </div>
                     </Link>
 
-                    <Button className="w-full bg-primary hover:bg-primary-hover text-primary-foreground">
-                      <ShoppingCart className="h-4 w-4 mr-2" />
+                    <Button className="w-full bg-primary hover:bg-primary-hover text-primary-foreground text-xs md:text-sm py-2 md:py-2">
+                      <ShoppingCart className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2" />
                       Add to Cart
                     </Button>
                   </CardContent>
