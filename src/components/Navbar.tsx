@@ -9,12 +9,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const categories = [
   {
@@ -108,9 +109,17 @@ const categories = [
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const isMobile = useIsMobile();
 
   const toggleCategory = (categoryName: string) => {
     setExpandedCategory(expandedCategory === categoryName ? null : categoryName);
+  };
+
+  const handleSearchFocus = () => {
+    if (isMobile) {
+      navigate("/search-suggestions");
+    }
   };
 
   return (
@@ -145,10 +154,24 @@ const Navbar = () => {
                 type="text"
                 placeholder="Search for products, brands and more"
                 className="w-full pl-4 pr-12 py-2 bg-background text-foreground border-none rounded-sm"
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    const target = e.target as HTMLInputElement;
+                    if (target.value.trim()) {
+                      navigate(`/search?q=${encodeURIComponent(target.value.trim())}`);
+                    }
+                  }
+                }}
               />
               <Button
                 size="sm"
                 className="absolute right-0 top-0 h-full px-4 bg-warning hover:bg-warning/90 text-warning-foreground rounded-l-none rounded-r-sm"
+                onClick={() => {
+                  const input = document.querySelector('input[placeholder="Search for products, brands and more"]') as HTMLInputElement;
+                  if (input && input.value.trim()) {
+                    navigate(`/search?q=${encodeURIComponent(input.value.trim())}`);
+                  }
+                }}
               >
                 <Search className="h-4 w-4" />
               </Button>
@@ -164,6 +187,15 @@ const Navbar = () => {
               >
                 <User className="h-4 w-4" />
                 <span className="text-sm">Login</span>
+              </Button>
+            </Link>
+            <Link to="/profile">
+              <Button
+                variant="ghost"
+                className="text-gray-800 hover:bg-cyan-200 flex items-center space-x-1"
+              >
+                <User className="h-4 w-4" />
+                <span className="text-sm hidden md:inline">Profile</span>
               </Button>
             </Link>
             <Link to="/cart">
@@ -188,10 +220,13 @@ const Navbar = () => {
               type="text"
               placeholder="Search for products, brands and more"
               className="w-full pl-4 pr-12 py-2 bg-background text-foreground border-none rounded-sm"
+              onFocus={handleSearchFocus}
+              readOnly
             />
             <Button
               size="sm"
               className="absolute right-0 top-0 h-full px-4 bg-warning hover:bg-warning/90 text-warning-foreground rounded-l-none rounded-r-sm"
+              onClick={handleSearchFocus}
             >
               <Search className="h-4 w-4" />
             </Button>
@@ -207,13 +242,15 @@ const Navbar = () => {
             {categories.map((category) => (
               <HoverCard key={category.name} openDelay={0} closeDelay={0}>
                 <HoverCardTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    className="text-foreground hover:bg-muted flex items-center space-x-1"
-                  >
-                    <span className="text-sm">{category.name}</span>
-                    <ChevronDown className="h-3 w-3" />
-                  </Button>
+                  <Link to={`/category/${category.name.toLowerCase().replace(/\s+/g, "-")}`}>
+                    <Button
+                      variant="ghost"
+                      className="text-foreground hover:bg-muted flex items-center space-x-1"
+                    >
+                      <span className="text-sm">{category.name}</span>
+                      <ChevronDown className="h-3 w-3" />
+                    </Button>
+                  </Link>
                 </HoverCardTrigger>
                 <HoverCardContent className="w-64 bg-popover border border-border p-0">
                   <div className="py-2">
@@ -269,22 +306,39 @@ const Navbar = () => {
                     <span className="text-sm">Login</span>
                   </Button>
                 </Link>
+                <Link to="/profile">
+                  <Button
+                    variant="ghost"
+                    className="text-gray-800 hover:bg-cyan-200 w-full justify-start mt-2"
+                  >
+                    <User className="h-4 w-4 mr-2" />
+                    <span className="text-sm">Profile</span>
+                  </Button>
+                </Link>
               </div>
               
               {/* Categories */}
               {categories.map((category) => (
                 <div key={category.name} className="border-b border-border pb-2">
-                  <button
-                    onClick={() => toggleCategory(category.name)}
-                    className="w-full flex items-center justify-between font-medium text-foreground mb-2 py-2 hover:bg-muted rounded px-2"
-                  >
-                    <span>{category.name}</span>
-                    <ChevronDown 
-                      className={`h-4 w-4 transition-transform ${
-                        expandedCategory === category.name ? 'rotate-180' : ''
-                      }`} 
-                    />
-                  </button>
+                  <div className="w-full flex items-center justify-between font-medium text-foreground mb-2 py-2 hover:bg-muted rounded px-2">
+                    <Link 
+                      to={`/category/${category.name.toLowerCase().replace(/\s+/g, "-")}`}
+                      className="flex-1"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      <span>{category.name}</span>
+                    </Link>
+                    <button
+                      onClick={() => toggleCategory(category.name)}
+                      className="p-1"
+                    >
+                      <ChevronDown 
+                        className={`h-4 w-4 transition-transform ${
+                          expandedCategory === category.name ? 'rotate-180' : ''
+                        }`} 
+                      />
+                    </button>
+                  </div>
                   {expandedCategory === category.name && (
                     <div className="space-y-1 pl-4 bg-muted/30 rounded p-2">
                       {category.subcategories.map((subcategory, index) => (

@@ -123,7 +123,7 @@ const ProductListing = () => {
     <div className="min-h-screen bg-background font-roboto">
       <Navbar />
 
-      <div className="container mx-auto px-4 py-6">
+      <div className="w-full px-4 py-6">
         {/* Breadcrumb and Header */}
         <div className="mb-6">
           <nav className="text-sm text-muted-foreground mb-2">

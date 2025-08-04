@@ -439,36 +439,38 @@ const topPicksProducts = [
 const CategoryCards = () => {
   return (
     <section className="py-16 bg-background">
-      <div className="container mx-auto px-4 space-y-12">
+      <div className="w-full px-4 space-y-12">
         
         {/* Medical Section */}
         <div>
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-foreground font-roboto">Medical</h2>
+            <Link to="/category/medical" className="text-2xl font-bold text-foreground font-roboto hover:text-primary transition-colors cursor-pointer">Medical</Link>
             <Link to="/category/medical" className="text-primary hover:text-primary-hover flex items-center gap-1">
               View More <ChevronRight className="h-4 w-4" /> 6+
             </Link>
           </div>
           <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide scroll-smooth" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            {medicalProducts.map((product) => (
-              <Card key={product.id} className="min-w-[200px] flex-shrink-0 bg-card border border-border hover:shadow-md transition-shadow cursor-pointer">
-                <CardContent className="p-4">
-                  <div className="relative mb-3">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-32 object-cover rounded-lg"
-                    />
-                    <Badge className="absolute top-2 left-2 bg-discount text-white text-xs">
-                      {product.discount}% OFF
-                    </Badge>
-                  </div>
-                  <h3 className="font-medium text-sm text-card-foreground mb-1 line-clamp-2">
-                    {product.name}
-                  </h3>
-                  <p className="text-xs text-muted-foreground">Up to 50% Off</p>
-                </CardContent>
-              </Card>
+                        {medicalProducts.map((product) => (
+              <Link key={product.id} to={`/product/${product.id}`}>
+                <Card className="min-w-[200px] flex-shrink-0 bg-card border border-border hover:shadow-md transition-shadow cursor-pointer">
+                  <CardContent className="p-4">
+                    <div className="relative mb-3">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-32 object-cover rounded-lg"
+                      />
+                      <Badge className="absolute top-2 left-2 bg-discount text-white text-xs">
+                        {product.discount}% OFF
+                      </Badge>
+                    </div>
+                    <h3 className="font-medium text-sm text-card-foreground mb-1 line-clamp-2">
+                      {product.name}
+                    </h3>
+                    <p className="text-xs text-muted-foreground">Up to 50% Off</p>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>
@@ -476,31 +478,33 @@ const CategoryCards = () => {
         {/* Groceries Section */}
         <div>
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-foreground font-roboto">Groceries</h2>
+            <Link to="/category/groceries" className="text-2xl font-bold text-foreground font-roboto hover:text-primary transition-colors cursor-pointer">Groceries</Link>
             <Link to="/category/groceries" className="text-primary hover:text-primary-hover flex items-center gap-1">
               View More <ChevronRight className="h-4 w-4" /> 5+
             </Link>
           </div>
           <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide scroll-smooth" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            {groceryProducts.map((product) => (
-              <Card key={product.id} className="min-w-[200px] flex-shrink-0 bg-card border border-border hover:shadow-md transition-shadow cursor-pointer">
-                <CardContent className="p-4">
-                  <div className="relative mb-3">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-32 object-cover rounded-lg"
-                    />
-                    <Badge className="absolute top-2 left-2 bg-discount text-white text-xs">
-                      {product.discount}% OFF
-                    </Badge>
-                  </div>
-                  <h3 className="font-medium text-sm text-card-foreground mb-1 line-clamp-2">
-                    {product.name}
-                  </h3>
-                  <p className="text-xs text-muted-foreground">Up to 50% Off</p>
-                </CardContent>
-              </Card>
+                        {groceryProducts.map((product) => (
+              <Link key={product.id} to={`/product/${product.id}`}>
+                <Card className="min-w-[200px] flex-shrink-0 bg-card border border-border hover:shadow-md transition-shadow cursor-pointer">
+                  <CardContent className="p-4">
+                    <div className="relative mb-3">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-32 object-cover rounded-lg"
+                      />
+                      <Badge className="absolute top-2 left-2 bg-discount text-white text-xs">
+                        {product.discount}% OFF
+                      </Badge>
+                    </div>
+                    <h3 className="font-medium text-sm text-card-foreground mb-1 line-clamp-2">
+                      {product.name}
+                    </h3>
+                    <p className="text-xs text-muted-foreground">Up to 50% Off</p>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>
@@ -508,31 +512,33 @@ const CategoryCards = () => {
         {/* Fashion & Beauty Section */}
         <div>
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-foreground font-roboto">FashionBeauty</h2>
+            <Link to="/category/fashion-beauty" className="text-2xl font-bold text-foreground font-roboto hover:text-primary transition-colors cursor-pointer">FashionBeauty</Link>
             <Link to="/category/fashion-beauty" className="text-primary hover:text-primary-hover flex items-center gap-1">
               View More <ChevronRight className="h-4 w-4" /> 4+
             </Link>
           </div>
           <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide scroll-smooth" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            {fashionProducts.map((product) => (
-              <Card key={product.id} className="min-w-[200px] flex-shrink-0 bg-card border border-border hover:shadow-md transition-shadow cursor-pointer">
-                <CardContent className="p-4">
-                  <div className="relative mb-3">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-32 object-cover rounded-lg"
-                    />
-                    <Badge className="absolute top-2 left-2 bg-discount text-white text-xs">
-                      {product.discount}% OFF
-                    </Badge>
-                  </div>
-                  <h3 className="font-medium text-sm text-card-foreground mb-1 line-clamp-2">
-                    {product.name}
-                  </h3>
-                  <p className="text-xs text-muted-foreground">Up to 50% Off</p>
-                </CardContent>
-              </Card>
+                        {fashionProducts.map((product) => (
+              <Link key={product.id} to={`/product/${product.id}`}>
+                <Card className="min-w-[200px] flex-shrink-0 bg-card border border-border hover:shadow-md transition-shadow cursor-pointer">
+                  <CardContent className="p-4">
+                    <div className="relative mb-3">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-32 object-cover rounded-lg"
+                      />
+                      <Badge className="absolute top-2 left-2 bg-discount text-white text-xs">
+                        {product.discount}% OFF
+                      </Badge>
+                    </div>
+                    <h3 className="font-medium text-sm text-card-foreground mb-1 line-clamp-2">
+                      {product.name}
+                    </h3>
+                    <p className="text-xs text-muted-foreground">Up to 50% Off</p>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>
@@ -540,31 +546,33 @@ const CategoryCards = () => {
         {/* Devices Section */}
         <div>
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-foreground font-roboto">Devices</h2>
+            <Link to="/category/devices" className="text-2xl font-bold text-foreground font-roboto hover:text-primary transition-colors cursor-pointer">Devices</Link>
             <Link to="/category/devices" className="text-primary hover:text-primary-hover flex items-center gap-1">
               View More <ChevronRight className="h-4 w-4" /> 3+
             </Link>
           </div>
           <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide scroll-smooth" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            {deviceProducts.map((product) => (
-              <Card key={product.id} className="min-w-[200px] flex-shrink-0 bg-card border border-border hover:shadow-md transition-shadow cursor-pointer">
-                <CardContent className="p-4">
-                  <div className="relative mb-3">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-32 object-cover rounded-lg"
-                    />
-                    <Badge className="absolute top-2 left-2 bg-discount text-white text-xs">
-                      {product.discount}% OFF
-                    </Badge>
-                  </div>
-                  <h3 className="font-medium text-sm text-card-foreground mb-1 line-clamp-2">
-                    {product.name}
-                  </h3>
-                  <p className="text-xs text-muted-foreground">Up to 50% Off</p>
-                </CardContent>
-              </Card>
+                        {deviceProducts.map((product) => (
+              <Link key={product.id} to={`/product/${product.id}`}>
+                <Card className="min-w-[200px] flex-shrink-0 bg-card border border-border hover:shadow-md transition-shadow cursor-pointer">
+                  <CardContent className="p-4">
+                    <div className="relative mb-3">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-32 object-cover rounded-lg"
+                      />
+                      <Badge className="absolute top-2 left-2 bg-discount text-white text-xs">
+                        {product.discount}% OFF
+                      </Badge>
+                    </div>
+                    <h3 className="font-medium text-sm text-card-foreground mb-1 line-clamp-2">
+                      {product.name}
+                    </h3>
+                    <p className="text-xs text-muted-foreground">Up to 50% Off</p>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>
@@ -572,31 +580,33 @@ const CategoryCards = () => {
         {/* Electrical Section */}
         <div>
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-foreground font-roboto">Electrical</h2>
+            <Link to="/category/electrical" className="text-2xl font-bold text-foreground font-roboto hover:text-primary transition-colors cursor-pointer">Electrical</Link>
             <Link to="/category/electrical" className="text-primary hover:text-primary-hover flex items-center gap-1">
               View More <ChevronRight className="h-4 w-4" /> 4+
             </Link>
           </div>
           <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide scroll-smooth" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            {electricalProducts.map((product) => (
-              <Card key={product.id} className="min-w-[200px] flex-shrink-0 bg-card border border-border hover:shadow-md transition-shadow cursor-pointer">
-                <CardContent className="p-4">
-                  <div className="relative mb-3">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-32 object-cover rounded-lg"
-                    />
-                    <Badge className="absolute top-2 left-2 bg-discount text-white text-xs">
-                      {product.discount}% OFF
-                    </Badge>
-                  </div>
-                  <h3 className="font-medium text-sm text-card-foreground mb-1 line-clamp-2">
-                    {product.name}
-                  </h3>
-                  <p className="text-xs text-muted-foreground">Up to 50% Off</p>
-                </CardContent>
-              </Card>
+                        {electricalProducts.map((product) => (
+              <Link key={product.id} to={`/product/${product.id}`}>
+                <Card className="min-w-[200px] flex-shrink-0 bg-card border border-border hover:shadow-md transition-shadow cursor-pointer">
+                  <CardContent className="p-4">
+                    <div className="relative mb-3">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-32 object-cover rounded-lg"
+                      />
+                      <Badge className="absolute top-2 left-2 bg-discount text-white text-xs">
+                        {product.discount}% OFF
+                      </Badge>
+                    </div>
+                    <h3 className="font-medium text-sm text-card-foreground mb-1 line-clamp-2">
+                      {product.name}
+                    </h3>
+                    <p className="text-xs text-muted-foreground">Up to 50% Off</p>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>
@@ -604,7 +614,7 @@ const CategoryCards = () => {
         {/* Automotive Section */}
         <div>
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-foreground font-roboto">Automotive</h2>
+            <Link to="/category/automotive" className="text-2xl font-bold text-foreground font-roboto hover:text-primary transition-colors cursor-pointer">Automotive</Link>
             <Link to="/category/automotive" className="text-primary hover:text-primary-hover flex items-center gap-1">
               View More <ChevronRight className="h-4 w-4" /> 4+
             </Link>
@@ -636,7 +646,7 @@ const CategoryCards = () => {
         {/* Sports Section */}
         <div>
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-foreground font-roboto">Sports</h2>
+            <Link to="/category/sports" className="text-2xl font-bold text-foreground font-roboto hover:text-primary transition-colors cursor-pointer">Sports</Link>
             <Link to="/category/sports" className="text-primary hover:text-primary-hover flex items-center gap-1">
               View More <ChevronRight className="h-4 w-4" /> 4+
             </Link>
@@ -665,10 +675,10 @@ const CategoryCards = () => {
           </div>
         </div>
 
-                 {/* Home Interior Section */}
-         <div>
-           <div className="flex justify-between items-center mb-6">
-             <h2 className="text-2xl font-bold text-foreground font-roboto">Home Interior</h2>
+                                   {/* Home Interior Section */}
+          <div>
+            <div className="flex justify-between items-center mb-6">
+              <Link to="/category/home-interior" className="text-2xl font-bold text-foreground font-roboto hover:text-primary transition-colors cursor-pointer">Home Interior</Link>
              <Link to="/category/home-interior" className="text-primary hover:text-primary-hover flex items-center gap-1">
                View More <ChevronRight className="h-4 w-4" /> 4+
              </Link>
